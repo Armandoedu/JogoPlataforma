@@ -31,8 +31,3 @@ class Game:
             self.game_mapa.draw()
             pygame.display.flip()
             self.clock.tick(60)
-            
-            
-
-game = Game()
-game.run()

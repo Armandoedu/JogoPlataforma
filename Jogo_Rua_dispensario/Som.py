@@ -20,5 +20,3 @@ class Som:
 
     def volume(self):
         pygame.mixer.music.set_volume(3)
-
-    

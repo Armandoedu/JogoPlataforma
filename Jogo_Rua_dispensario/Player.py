@@ -11,7 +11,7 @@ tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Player')
 
 PLAYER_RUN = [
-        pygame.image.load('sprites/run/0001.png'), 
+        pygame.image.load('Jogo_Rua_dispensario/JogoPlataforma/Jogo_Rua_dispensario/Sprites/run/0001.png'), 
         pygame.image.load('sprites/run/0003.png'),
         pygame.image.load('sprites/run/0005.png'),
         pygame.image.load('sprites/run/0007.png'),

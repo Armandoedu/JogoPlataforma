@@ -1,7 +1,6 @@
 import pygame
-from mapa import Mapa
-from som import Som
-
+from Mapa import Mapa
+from Som import Som
 
 class Game:
     def __init__(self):
