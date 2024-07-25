@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 if event.key == K_s:
                     y = y + 20
                 player.mover()
-        
+
         animacoes.draw(tela)
         animacoes.update()
         player.update()

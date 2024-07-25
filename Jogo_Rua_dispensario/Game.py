@@ -3,7 +3,6 @@ from Mapa import Mapa
 from Som import Som
 
 class Game:
-
     def __init__(self):
         pygame.init()
         self.screen_whidth = 1920
