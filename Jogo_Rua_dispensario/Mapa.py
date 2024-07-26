@@ -1,8 +1,14 @@
 import pygame
+import os
+
+image_path = "/home/joao/Jogo_Rua_dispensario/JogoPlataforma/Jogo_Rua_dispensario/Sprites/Rua.png"
+#image_path = os.path.join("Sprites", "Rua.png")
+
 
 class Mapa:
     def __init__(self, image_path, screen):
         self.image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(self.image, (800, 500))
         self.screen = screen
         self.rect = self.image.get_rect()
 
@@ -18,7 +24,7 @@ class Game:
         pygame.display.set_caption("Rua Do Dispensário")
         self.clock = pygame.time.Clock()
         self.running = True
-        self.game_mapa = Mapa('Jogo_Rua_dispensario/Rua.png', self.screen)
+        self.game_mapa = Mapa(image_path, self.screen)
 
     def run(self):
         while self.running:
