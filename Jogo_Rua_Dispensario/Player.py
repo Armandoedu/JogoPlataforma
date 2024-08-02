@@ -1,39 +1,46 @@
 import pygame 
-from pygame.locals import *
-from sys import exit
+import os
 
-sprites_path = "JogoPlataforma/Jogo_Rua_Dispensario/Sprites/run/"
+sprites_path = os.path.dirname(__file__)
+sprites = os.path.join(sprites_path, 'Sprites')
+player_sprites_run = sprites + '/spritesBoy/' + 'Boyrun.png'
+player_sprites_idle = sprites + '/spritesBoy/' + 'BoyIdle.png'
+player_sprites_jump = sprites + '/spritesBoy/' + 'Boyjump.png'
 
-PLAYER_RUN = [
-        pygame.image.load(f'{sprites_path}0001.png'),
-        pygame.image.load(f'{sprites_path}0003.png'),
-        pygame.image.load(f'{sprites_path}0005.png'),
-        pygame.image.load(f'{sprites_path}0007.png'),
-        pygame.image.load(f'{sprites_path}0009.png'),
-        pygame.image.load(f'{sprites_path}0011.png'),
-        pygame.image.load(f'{sprites_path}0013.png'),
-        pygame.image.load(f'{sprites_path}0015.png'),
-        pygame.image.load(f'{sprites_path}0017.png'),
-        pygame.image.load(f'{sprites_path}0019.png'),
-        pygame.image.load(f'{sprites_path}0021.png'),
-        pygame.image.load(f'{sprites_path}0023.png'),
-        pygame.image.load(f'{sprites_path}0025.png'),
-        pygame.image.load(f'{sprites_path}0027.png'),
-        pygame.image.load(f'{sprites_path}0029.png'),
-]
+sprite_sheet_run = pygame.image.load(player_sprites_run)
+sprite_sheet_idle = pygame.image.load(player_sprites_idle)
+sprite_sheet_jump = pygame.image.load(player_sprites_jump)
 
-# PLAYER_JUMP = []
+PLAYER_DIMENSION = (32*3, 32*3)
+sprite_width, sprite_heigth = 32, 32
+
+PLAYER_RUN = []
+PLAYER_IDLE = []
+PLAYER_JUMP = []
+
+for i in range(4):
+    x = i * sprite_width
+    y = 0
+    IMG_RUN = sprite_sheet_run.subsurface((x, y, sprite_width, sprite_heigth ))
+    IMG_IDLE = sprite_sheet_idle.subsurface((x, y, sprite_width, sprite_heigth ))
+    IMG_JUMP = sprite_sheet_jump.subsurface((x, y, sprite_width, sprite_heigth ))
+    PLAYER_RUN.append(IMG_RUN)
+    PLAYER_IDLE.append(IMG_IDLE)
+    PLAYER_JUMP.append(IMG_JUMP)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen): # Construtor
         pygame.sprite.Sprite.__init__(self)
         self.sprites:list = PLAYER_RUN
+        self.sprites_idle: list = PLAYER_IDLE
+        self.sprites_jump: list = PLAYER_JUMP
         self.atual = 0
         self.image = self.sprites[self.atual]
-        self.image = pygame.transform.scale(self.image, (120, 120))
+        self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         self.rect = self.image.get_rect() # Coordenadas da imagem 
         self.rect.topleft = 100, 100 # Canto superior esquerdo
         self.animar = False
+        self.isJumping = False
         self.screen = screen
         self.speed = 5
 
@@ -59,10 +66,18 @@ class Player(pygame.sprite.Sprite):
             self.mover()
 
     def update(self):
-        if self.animar == True:
+        if self.animar == True: #correndo
             self.atual = self.atual + 1
             if self.atual >= len(self.sprites):
                 self.atual = 0
                 self.animar = False
             self.image = self.sprites[int(self.atual)]
             self.image = pygame.transform.scale(self.image, (120, 120))
+        else: ## parado
+            self.atual = self.atual + 1
+            if self.atual >= len(self.sprites_idle):
+                self.atual = 0
+                # self.animar = False
+            self.image = self.sprites_idle[int(self.atual)]
+            self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
+

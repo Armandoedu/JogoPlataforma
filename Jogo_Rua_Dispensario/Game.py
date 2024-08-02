@@ -1,10 +1,11 @@
 import pygame
+import os
 from Player import Player
 from Mapa import Mapa
 from Som import Som
 
-image = 'JogoPlataforma/Jogo_Rua_Dispensario/Sprites/Rua.png'
-music = 'JogoPlataforma/Jogo_Rua_Dispensario/Music/musica_de_fundo.mp3'
+abs_path = os.path.dirname(__file__)
+music = os.path.join(abs_path, 'Music', 'musica_de_fundo.mp3')
 
 class Game:
     def __init__(self):
@@ -15,7 +16,7 @@ class Game:
         pygame.display.set_caption("Rua Do Dispensário")
         self.clock = pygame.time.Clock()
         self.running = True
-        self.game_mapa = Mapa(image, self.screen)
+        self.game_mapa = Mapa(self.screen)
         self.musica = Som(music)
         self.musica.play()
         self.player = Player(self.screen)
@@ -33,4 +34,4 @@ class Game:
             self.player.handle_keys()
             self.player.update()
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(15)

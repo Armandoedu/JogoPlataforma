@@ -1,10 +1,13 @@
 import pygame
+import os
 
-image_path = "JogoPlataforma/Jogo_Rua_dispensario/Sprites/Rua.png"
+sprites_path = os.path.dirname(__file__)
+sprites = os.path.join(sprites_path, 'Sprites')
+image_path = sprites + '/mapa/'
 
 class Mapa:
-    def __init__(self, image_path, screen):
-        self.image = pygame.image.load(image_path)
+    def __init__(self, screen):
+        self.image = pygame.image.load(f'{image_path}Rua.png')
         self.image = pygame.transform.scale(self.image, (800, 500))
         self.screen = screen
         self.rect = self.image.get_rect()
