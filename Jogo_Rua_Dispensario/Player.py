@@ -41,8 +41,6 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprites[self.current_sprite]
         self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         self.rect = self.image.get_rect() # Coordenadas da imagem 
-
-        # topleft foi atualizado agora o player aparece no começo da tela e em cima da rua (apagar esse comentário depois)
         self.rect.topleft = 0, 455 # Canto superior esquerdo
         self.animate = False
         self.screen = screen
@@ -58,7 +56,6 @@ class Player(pygame.sprite.Sprite):
         self.player_velocity_y = 0'''
 
     def move(self):
-        # animar agora é animate (apagar esse comentário depois)
         self.animate = True
 
     def draw(self):
@@ -72,9 +69,13 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.rect.x += self.speed
             self.move()
-        # Mover para cima e para baixo removidos, ir pra cima agora deve ser pular (space) (apagar esse comentário depois)
+        if keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_SPACE]:
+            self.rect.y -= self.speed
+            self.move()
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.rect.y += self.speed
+            self.move()
 
-    # "atual" agora é "current_sprite" (sprite atual) (apagar esse comentário depois)
     def update(self):
         if self.animate == True: # Correndo
             self.current_sprite = self.current_sprite + 1
@@ -90,4 +91,3 @@ class Player(pygame.sprite.Sprite):
                 # self.animar = False
             self.image = self.sprites_idle[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
-

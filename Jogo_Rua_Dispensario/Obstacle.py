@@ -1,27 +1,18 @@
 import pygame
 import random
 
-YELLOW = (255, 255, 0)
-screen_width = 800
-screen_height = 600
-
-# Obstacle ainda não está funcional
 class Obstacle:
-    def __init__(self, x, y, screen_width, screen_height):
-        self.rect = pygame.Rect(x, y, screen_width, screen_height)
-        self.speed = 7
-        self.obstacle_size = 50
-        self.obstacle_x = screen_width
-        self.obstacle_y = screen_height - self.obstacle_size
-        self.obstacle_speed = 7
+    def __init__(self, screen_width, screen_height):
+        obstacle_size = random.randint(30,70)
+        self.rect = pygame.Rect(screen_width, screen_height-50 - obstacle_size, obstacle_size, obstacle_size)
         self.screen_width = screen_width
-        self.screen_height = screen_height
 
-    def moveObstacle(self):
-        self.rect.y += self.speed
-        if self.rect.y > self.screen_height:
-            self.rect.y = -self.rect.height
-            self.rect.x = random.randint(0, self.screen_width - self.rect.width)
+    def update(self):
+        obstacle_speed = random.randint(10,25)
+        self.rect.x -= obstacle_speed
+        if self.rect.x < 0:
+            self.rect.x = self.screen_width
 
-    def drawObstacle(self, screen):
-        pygame.draw.rect(screen, YELLOW, self.rect)
+    def draw(self, screen):
+        obstacle_color = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
+        pygame.draw.rect(screen, obstacle_color, self.rect)

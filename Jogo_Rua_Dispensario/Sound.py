@@ -1,6 +1,5 @@
 import pygame
 
-# Som agora é Sound (apagar esse comentário depois)
 class Sound:
     def __init__(self, music):
         pygame.mixer.init()
