@@ -12,15 +12,16 @@ player_sprites_jump = sprites + '/spritesBoy/' + 'Boyjump.png'
 sprite_sheet_run = pygame.image.load(player_sprites_run)
 sprite_sheet_idle = pygame.image.load(player_sprites_idle)
 sprite_sheet_jump = pygame.image.load(player_sprites_jump)
+
 PLAYER_RUN = []
 PLAYER_IDLE = []
 PLAYER_JUMP = []
 
-# Dimensões do player
+# Dimensões das sprites
 PLAYER_DIMENSION = (32*3, 32*3)
 sprite_width, sprite_heigth = 32, 32
 
-# Adicionar sprites em uma lista
+# cortando as sprites
 for i in range(4):
     x = i * sprite_width
     y = 0
@@ -30,6 +31,9 @@ for i in range(4):
     PLAYER_RUN.append(IMG_RUN)
     PLAYER_IDLE.append(IMG_IDLE)
     PLAYER_JUMP.append(IMG_JUMP)
+
+width = 800
+height = 600
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, screen_width, screen_height): # Construtor
@@ -41,19 +45,25 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprites[self.current_sprite]
         self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         self.rect = self.image.get_rect() # Coordenadas da imagem 
-        self.rect.topleft = 0, 455 # Canto superior esquerdo
+        self.rect.topleft = 0, 500 # Canto superior esquerdo
         self.animate = False
         self.screen = screen
         self.speed = 5
+        self.y = height / 2
+        self.x = width
         self.isJumping = False
+        self.ground = height - PLAYER_DIMENSION[1]
+        self.gravity = 1
+        self.speed_jump = 0
 
-        ''' adicições (ainda não estão sendo usadas)
-        self.player_size = 32
-        self.player_x = screen_width // 2
-        self.player_y = screen_height - self.player_size
-        self.jump_height = 10
-        self.gravity = 0.5
-        self.player_velocity_y = 0'''
+    def jump(self):
+        if self.isJumping:
+            self.speed_jump += self.gravity
+            self.rect.y += self.speed_jump
+            if self.rect.y >= self.ground:
+                self.rect.y = self.ground
+                self.speed_jump = 0
+                self.isJumping = False
 
     def move(self):
         self.animate = True
@@ -63,31 +73,41 @@ class Player(pygame.sprite.Sprite):
 
     def handleKeys(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.rect.x -= self.speed
+        if keys[pygame.K_LEFT] or keys[pygame.K_a] > 0:
+            self.rect.x -= self.speed 
             self.move()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.rect.x += self.speed
             self.move()
-        if keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_SPACE]:
-            self.rect.y -= self.speed
-            self.move()
-        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.rect.y += self.speed
-            self.move()
+        if (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_SPACE]) and not self.isJumping:
+            self.isJumping = True
+            self.speed_jump = - 10
 
     def update(self):
+        if self.isJumping:
+            self.jump()
+        else:
+            if self.rect.y < self.ground:
+                self.rect.y += self.gravity
+
         if self.animate == True: # Correndo
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites):
                 self.current_sprite = 0
                 self.animate = False
             self.image = self.sprites[int(self.current_sprite)]
-            self.image = pygame.transform.scale(self.image, (120, 120))
+            self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         else: # Parado
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites_idle):
                 self.current_sprite = 0
-                # self.animar = False
             self.image = self.sprites_idle[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
+        
+        if self.isJumping: # Pulando
+            self.current_sprite = self.current_sprite + 1
+            if self.current_sprite >= len(self.sprites_jump):
+                self.current_sprite = 0
+            self.image = self.sprites_jump[int(self.current_sprite)]
+            self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
+
