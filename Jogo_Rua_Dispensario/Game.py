@@ -38,8 +38,8 @@ class Game:
         text = font.render("Game Over!", True, RED)
         screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2 - text.get_height() // 2))
         pygame.display.flip()
-        #pygame.time.wait(2000)
-        #pygame.quit()
+        pygame.time.wait(2000)
+        pygame.quit()
         #exit()
 
     def handleEvents(self):
@@ -58,6 +58,8 @@ class Game:
         self.player.handleKeys()
         self.player.update()
         self.obstacle.update()
+        if self.player.isColision(self.obstacle):
+            self.printGameOver()
 
     def playBackgroundMusic(self):
         '''Toca a música de fundo do jogo.'''
