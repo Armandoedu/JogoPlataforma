@@ -2,6 +2,9 @@ from Obstacle import Obstacle
 from Player import Player
 from Sound import Sound
 from Map import Map
+from Menu import Menu
+from pygame.locals import *
+from sys import exit
 import random
 import pygame
 import os
@@ -30,7 +33,9 @@ class Game:
         self.game_map = Map(screen, screen_width, screen_height)
         self.player = Player(screen, screen_width, screen_height)
         self.obstacle = Obstacle(screen_width, screen_height)
+        self.menu = Menu(screen, screen_width, screen_height)
         self.running = True
+        self.state = "Menu"
 
     def printGameOver(self):
         '''Imprime "Game Over! na tela."'''
@@ -69,9 +74,22 @@ class Game:
 
     def run(self):
         '''Roda o jogo.'''
-        self.playBackgroundMusic()
-        while self.running:
-            self.handleEvents()
-            self.draw(screen)
-            self.update()
-            self.clock.tick(15)
+        while True:
+            if self.state == "Menu":
+                self.menu.ruunning()
+                self.state = "Playing"
+            
+            if self.state == "Playing":
+                self.playBackgroundMusic()
+                while True:
+                    for event in pygame.event.get():
+                        if event.type == QUIT:
+                            pygame.quit()
+                            exit()
+                    
+                    self.handleEvents()
+                    self.draw(screen)
+                    self.update()
+                    self.clock.tick(15)
+        pygame.quit()
+        exit()
