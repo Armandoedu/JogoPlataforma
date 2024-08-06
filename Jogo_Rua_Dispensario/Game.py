@@ -24,7 +24,7 @@ pygame.init()
 pygame.display.set_caption("Rua Do Dispensário")
 
 # Variáveis da tela
-screen_width = 900
+screen_width = 900 
 screen_height = 600
 
 # Cria a tela do jogo
@@ -74,7 +74,7 @@ class Game:
     def playBackgroundMusic(self):
         '''Toca a música de fundo do jogo.'''
         self.musica.playMusic()
-        self.musica.setVolume(0.06) 
+        self.musica.setVolume(3) 
 
     def run(self):
         '''Roda o jogo.'''

@@ -16,15 +16,15 @@ class Menu:
         # self.height = 704
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("Rua do Dispensário")
-        self.image_background = pygame.image.load(f'{image_path}image_menu.png')
+        self.image_background = pygame.image.load(f'{image_path}dispeImagem.png')
         self.background = (0,0,0)
         self.running = True
-        self.title = pygame.font.Font(None, 72) 
-        self.title_surface = self.title.render("Rua Do Dispensário", False, (28,28,28))
-        self.title_rect = self.title_surface.get_rect(center=(screen_width/2, screen_height/2-200))
-        self.instruction = pygame.font.Font(None, 50) 
-        self.instruction_surface = self.instruction.render("Press ENTER", False, (28,28,28))
-        self.instruction_rect = self.instruction_surface.get_rect(center=(screen_width/2, screen_height/2-50))
+        # self.title = pygame.font.Font(None, 72) 
+        # self.title_surface = self.title.render("Rua Do Dispensário", False, (28,28,28))
+        # self.title_rect = self.title_surface.get_rect(center=(screen_width/2, screen_height/2-200))
+        # self.instruction = pygame.font.Font(None, 50) 
+        # self.instruction_surface = self.instruction.render("Press ENTER", False, (28,28,28))
+        # self.instruction_rect = self.instruction_surface.get_rect(center=(screen_width/2, screen_height/2-50))
         
 
     def ruunning(self):    
@@ -43,8 +43,8 @@ class Menu:
                         # exit()
             
             self.screen.blit(self.image_background, (0,0))
-            self.screen.blit(self.title_surface, self.title_rect)
-            self.screen.blit(self.instruction_surface, self.instruction_rect)
+            # self.screen.blit(self.title_surface, self.title_rect)
+            # self.screen.blit(self.instruction_surface, self.instruction_rect)
             pygame.display.flip()
 
         # pygame.quit()
