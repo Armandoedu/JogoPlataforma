@@ -49,15 +49,16 @@ class Player(pygame.sprite.Sprite):
         self.animate = False
         self.screen = screen
         self.speed = 6
-        self.y = height / 2
+        self.y = height // 2
         self.x = width
         self.isJumping = False
-        self.ground =( height-50) - (PLAYER_DIMENSION[1])
+        self.ground =( height - 50) - (PLAYER_DIMENSION[1])
         self.rect.y = self.ground
-        self.gravity = 0.5
+        self.gravity = 0.8
         self.speed_jump = 0
+        self.rect.inflate_ip((- 45, - 45))
 
-    def isColision(self, obstacle):
+    def isCollision(self, obstacle):
         return self.rect.colliderect(obstacle.rect)
 
     def jump(self):

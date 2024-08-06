@@ -58,7 +58,7 @@ class Game:
         self.player.handleKeys()
         self.player.update()
         self.obstacle.update()
-        if self.player.isColision(self.obstacle):
+        if self.player.isCollision(self.obstacle):
             self.printGameOver()
 
     def playBackgroundMusic(self):
