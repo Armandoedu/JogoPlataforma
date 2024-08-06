@@ -9,9 +9,9 @@ import os
 # musica de fundo
 
 
-# abs_path = os.path.dirname(__file__)
-# background_music = os.path.join(abs_path, 'Music', 'background_music.mp3')
-# barulho_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
+abs_path = os.path.dirname(__file__)
+musica_fundo = os.path.join(abs_path, 'Music', 'background_music.mp3')
+musica_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
 
 # Cores
 RED = (255,0,0)
@@ -33,7 +33,7 @@ class Game:
         self.game_map = Map(screen, screen_width, screen_height)
         self.player = Player(screen, screen_width, screen_height)
         self.obstacle = Obstacle(screen_width, screen_height)
-        self.musica_fundo = Sound()
+        self.musica = Sound(musica_fundo, musica_colisao)
         # self.musica_colisao = Sound()
         self.running = True
 
@@ -64,23 +64,22 @@ class Game:
         self.player.update()
         self.obstacle.update()
         if self.player.isColision(self.obstacle):
-            # self.barulho_colisao.playSaund()
+            self.musica.playSaund()
             self.printGameOver()
 
-    # def playBackgroundMusic(self):
-    #     '''Toca a música de fundo do jogo.'''
-    #     music = Sound()
-    #     music.playMusic()
-    #     music.setVolume(0.06) # 0.06 - para fones do ouvido (com fio)
+    def playBackgroundMusic(self):
+        '''Toca a música de fundo do jogo.'''
+        self.musica.playMusic()
+        self.musica.setVolume(0.06) 
 
-    # def run(self):
-    #     '''Roda o jogo.'''
-    #     # self.playBackgroundMusic()
-    #     self.barulho.playMusic()
-    #     self.barulho.setVolume(3)
+    def run(self):
+        '''Roda o jogo.'''
+        self.playBackgroundMusic()
+        # self.barulho.playMusic()
+        # self.barulho.setVolume(3)
 
-    #     while self.running:
-    #         self.handleEvents()
-    #         self.draw(screen)
-    #         self.update()
-    #         self.clock.tick(15)
+        while self.running:
+            self.handleEvents()
+            self.draw(screen)
+            self.update()
+            self.clock.tick(15)
