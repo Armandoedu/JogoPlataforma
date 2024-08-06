@@ -9,9 +9,12 @@ import random
 import pygame
 import os
 
-# Pegar o caminho da musica de fundo
+# musica de fundo
+
+
 abs_path = os.path.dirname(__file__)
-background_music = os.path.join(abs_path, 'Music', 'background_music.mp3')
+musica_fundo = os.path.join(abs_path, 'Music', 'background_music.mp3')
+musica_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
 
 # Cores
 RED = (255,0,0)
@@ -34,6 +37,7 @@ class Game:
         self.player = Player(screen, screen_width, screen_height)
         self.obstacle = Obstacle(screen_width, screen_height)
         self.menu = Menu(screen, screen_width, screen_height)
+        self.musica = Sound(musica_fundo, musica_colisao)
         self.running = True
         self.state = "Menu"
 
@@ -64,13 +68,13 @@ class Game:
         self.player.update()
         self.obstacle.update()
         if self.player.isColision(self.obstacle):
+            self.musica.playSaund()
             self.printGameOver()
 
     def playBackgroundMusic(self):
         '''Toca a música de fundo do jogo.'''
-        music = Sound(background_music)
-        music.playMusic()
-        music.setVolume(0.06) # 0.06 - para fones do ouvido (com fio)
+        self.musica.playMusic()
+        self.musica.setVolume(0.06) 
 
     def run(self):
         '''Roda o jogo.'''
