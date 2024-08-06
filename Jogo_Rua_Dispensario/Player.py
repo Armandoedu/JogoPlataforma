@@ -115,3 +115,4 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprites_jump[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
 
+

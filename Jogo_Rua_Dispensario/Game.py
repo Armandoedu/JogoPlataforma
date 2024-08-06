@@ -6,9 +6,12 @@ import random
 import pygame
 import os
 
-# Pegar o caminho da musica de fundo
-abs_path = os.path.dirname(__file__)
-background_music = os.path.join(abs_path, 'Music', 'background_music.mp3')
+# musica de fundo
+
+
+# abs_path = os.path.dirname(__file__)
+# background_music = os.path.join(abs_path, 'Music', 'background_music.mp3')
+# barulho_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
 
 # Cores
 RED = (255,0,0)
@@ -30,6 +33,8 @@ class Game:
         self.game_map = Map(screen, screen_width, screen_height)
         self.player = Player(screen, screen_width, screen_height)
         self.obstacle = Obstacle(screen_width, screen_height)
+        self.musica_fundo = Sound()
+        # self.musica_colisao = Sound()
         self.running = True
 
     def printGameOver(self):
@@ -59,19 +64,23 @@ class Game:
         self.player.update()
         self.obstacle.update()
         if self.player.isColision(self.obstacle):
+            # self.barulho_colisao.playSaund()
             self.printGameOver()
 
-    def playBackgroundMusic(self):
-        '''Toca a música de fundo do jogo.'''
-        music = Sound(background_music)
-        music.playMusic()
-        music.setVolume(0.06) # 0.06 - para fones do ouvido (com fio)
+    # def playBackgroundMusic(self):
+    #     '''Toca a música de fundo do jogo.'''
+    #     music = Sound()
+    #     music.playMusic()
+    #     music.setVolume(0.06) # 0.06 - para fones do ouvido (com fio)
 
-    def run(self):
-        '''Roda o jogo.'''
-        self.playBackgroundMusic()
-        while self.running:
-            self.handleEvents()
-            self.draw(screen)
-            self.update()
-            self.clock.tick(15)
+    # def run(self):
+    #     '''Roda o jogo.'''
+    #     # self.playBackgroundMusic()
+    #     self.barulho.playMusic()
+    #     self.barulho.setVolume(3)
+
+    #     while self.running:
+    #         self.handleEvents()
+    #         self.draw(screen)
+    #         self.update()
+    #         self.clock.tick(15)
