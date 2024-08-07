@@ -2,13 +2,19 @@ from Obstacle import Obstacle
 from Player import Player
 from Sound import Sound
 from Map import Map
+from Menu import Menu
+from pygame.locals import *
+from sys import exit
 import random
 import pygame
 import os
 
-# Pegar o caminho da musica de fundo
+# musica de fundo
+
+
 abs_path = os.path.dirname(__file__)
-background_music = os.path.join(abs_path, 'Music', 'background_music.mp3')
+musica_fundo = os.path.join(abs_path, 'Music', 'background_music.mp3')
+musica_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
 
 # Cores
 RED = (255,0,0)
@@ -18,7 +24,7 @@ pygame.init()
 pygame.display.set_caption("Rua Do Dispensário")
 
 # Variáveis da tela
-screen_width = 900
+screen_width = 900 
 screen_height = 600
 
 # Cria a tela do jogo
@@ -30,7 +36,10 @@ class Game:
         self.game_map = Map(screen, screen_width, screen_height)
         self.player = Player(screen, screen_width, screen_height)
         self.obstacle = Obstacle(screen_width, screen_height)
+        self.menu = Menu(screen, screen_width, screen_height)
+        self.musica = Sound(musica_fundo, musica_colisao)
         self.running = True
+        self.state = "Menu"
 
     def printGameOver(self):
         '''Imprime "Game Over! na tela."'''
@@ -58,20 +67,33 @@ class Game:
         self.player.handleKeys()
         self.player.update()
         self.obstacle.update()
-        if self.player.isCollision(self.obstacle):
+        if self.player.isColision(self.obstacle):
+            self.musica.playSaund()
             self.printGameOver()
 
     def playBackgroundMusic(self):
         '''Toca a música de fundo do jogo.'''
-        music = Sound(background_music)
-        music.playMusic()
-        music.setVolume(0.06) # 0.06 - para fones do ouvido (com fio)
+        self.musica.playMusic()
+        self.musica.setVolume(3) 
 
     def run(self):
         '''Roda o jogo.'''
-        self.playBackgroundMusic()
-        while self.running:
-            self.handleEvents()
-            self.draw(screen)
-            self.update()
-            self.clock.tick(15)
+        while True:
+            if self.state == "Menu":
+                self.menu.ruunning()
+                self.state = "Playing"
+            
+            if self.state == "Playing":
+                self.playBackgroundMusic()
+                while True:
+                    for event in pygame.event.get():
+                        if event.type == QUIT:
+                            pygame.quit()
+                            exit()
+                    
+                    self.handleEvents()
+                    self.draw(screen)
+                    self.update()
+                    self.clock.tick(15)
+        pygame.quit()
+        exit()
