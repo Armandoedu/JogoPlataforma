@@ -49,7 +49,7 @@ class Game:
         pygame.display.flip()
         pygame.time.wait(2000)
         pygame.quit()
-        #exit()
+        exit()
 
     def handleEvents(self):
         for event in pygame.event.get():
@@ -67,7 +67,7 @@ class Game:
         self.player.handleKeys()
         self.player.update()
         self.obstacle.update()
-        if self.player.isColision(self.obstacle):
+        if self.player.isCollision(self.obstacle):
             self.musica.playSaund()
             self.printGameOver()
 
