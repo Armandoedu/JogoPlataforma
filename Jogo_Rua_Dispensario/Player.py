@@ -36,7 +36,7 @@ width = 800
 height = 600
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, screen, screen_width, screen_height): # Construtor
+    def __init__(self, screen):
         pygame.sprite.Sprite.__init__(self)
         self.sprites:list = PLAYER_RUN
         self.sprites_idle: list = PLAYER_IDLE
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
         self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
-        self.rect = self.image.get_rect() # Coordenadas da imagem 
+        self.rect = self.image.get_rect() 
         self.rect.topleft = 0, 500 # Canto superior esquerdo
         self.animate = False
         self.screen = screen
@@ -95,21 +95,21 @@ class Player(pygame.sprite.Sprite):
             if self.rect.y < self.ground:
                 self.rect.y += self.gravity
 
-        if self.animate == True: # Correndo
+        if self.animate == True:
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites):
                 self.current_sprite = 0
                 self.animate = False
             self.image = self.sprites[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
-        else: # Parado
+        else: 
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites_idle):
                 self.current_sprite = 0
             self.image = self.sprites_idle[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         
-        if self.isJumping: # Pulando
+        if self.isJumping: 
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites_jump):
                 self.current_sprite = 0

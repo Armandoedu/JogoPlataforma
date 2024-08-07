@@ -1,5 +1,5 @@
 import pygame
-import os
+# import os
 
 class Sound:
     def __init__(self, musica_fundo, musica_colisao):
@@ -24,7 +24,7 @@ class Sound:
     def setVolume(self, new_volume):
         pygame.mixer.music.set_volume(new_volume)
 
-    def playSaund(self):
+    def playSound(self):
         self.musica_colisao.play()
         
 
