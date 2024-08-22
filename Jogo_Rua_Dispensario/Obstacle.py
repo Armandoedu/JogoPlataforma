@@ -1,11 +1,10 @@
 import pygame
 import random
-import os 
+import os
 
 sprites_path = os.path.dirname(__file__)
 sprites = os.path.join(sprites_path, 'Sprites')
 image_path = sprites + '/car/'
-
 obstacle_size = (32 * 3, 32 * 3)
 
 class Obstacle:

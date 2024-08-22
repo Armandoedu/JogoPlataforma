@@ -1,13 +1,12 @@
 import pygame
-# import os
+# import os  // Roda sem
 
 class Sound:
-    def __init__(self, musica_fundo, musica_colisao):
+    def __init__(self, background_music, collision_music):
         pygame.mixer.init()
-        self.musica_fundo = musica_fundo
-        pygame.mixer.music.load(self.musica_fundo)
-        self.musica_colisao = pygame.mixer.Sound(musica_colisao)
-
+        self.background_music = background_music
+        pygame.mixer.music.load(self.background_music)
+        self.collision_music = pygame.mixer.Sound(collision_music)
 
     def playMusic(self, loops=-1):
         pygame.mixer.music.play(loops)
@@ -25,7 +24,4 @@ class Sound:
         pygame.mixer.music.set_volume(new_volume)
 
     def playSound(self):
-        self.musica_colisao.play()
-        
-
-    
+        self.collision_music.play()

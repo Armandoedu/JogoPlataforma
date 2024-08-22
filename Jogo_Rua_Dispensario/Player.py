@@ -13,6 +13,7 @@ sprite_sheet_run = pygame.image.load(player_sprites_run)
 sprite_sheet_idle = pygame.image.load(player_sprites_idle)
 sprite_sheet_jump = pygame.image.load(player_sprites_jump)
 
+# Vetores das sprites
 PLAYER_RUN = []
 PLAYER_IDLE = []
 PLAYER_JUMP = []
@@ -21,7 +22,7 @@ PLAYER_JUMP = []
 PLAYER_DIMENSION = (32*3, 32*3)
 sprite_width, sprite_heigth = 32, 32
 
-# cortando as sprites
+# Cortando as sprites
 for i in range(4):
     x = i * sprite_width
     y = 0
@@ -32,6 +33,7 @@ for i in range(4):
     PLAYER_IDLE.append(IMG_IDLE)
     PLAYER_JUMP.append(IMG_JUMP)
 
+# Tamanho da tela
 width = 800
 height = 600
 
@@ -108,11 +110,10 @@ class Player(pygame.sprite.Sprite):
                 self.current_sprite = 0
             self.image = self.sprites_idle[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
-        
-        if self.isJumping: 
+
+        if self.isJumping:
             self.current_sprite = self.current_sprite + 1
             if self.current_sprite >= len(self.sprites_jump):
                 self.current_sprite = 0
             self.image = self.sprites_jump[int(self.current_sprite)]
             self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
-
