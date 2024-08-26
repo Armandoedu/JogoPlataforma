@@ -5,6 +5,7 @@ from Timer import Timer
 from Sound import Sound
 from Menu import Menu
 from Map import Map
+from GameOver import GameOver
 import pygame
 import os
 #from sys import exit // Roda sem
@@ -29,19 +30,11 @@ class Game:
         self.obstacle = Obstacle(screen_width, screen_height)
         self.menu = Menu(screen_width, screen_height)
         self.music = Sound(musica_fundo, musica_colisao)
+        self.game_over = GameOver(screen_width, screen_height)
         self.running = True
         self.state = "Menu"
         self.timer = Timer(screen)
 
-    def printGameOver(self):
-        '''Imprime "Game Over!" na tela."'''
-        font = pygame.font.SysFont("Arial", 60)
-        text = font.render("Game Over!", True, True, (255,0,0))
-        screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2 - text.get_height() // 2))
-        pygame.display.flip()
-        pygame.time.wait(2000)
-        pygame.quit()
-        exit()
 
     def draw(self, screen):
         self.game_map.draw()
@@ -50,6 +43,7 @@ class Game:
         self.timer.printTimeOnScreen()
         pygame.display.flip()
 
+
     def update(self):
         self.player.handleKeys()
         self.player.update()
@@ -57,7 +51,7 @@ class Game:
         self.timer.updateTime()
         if self.player.isCollision(self.obstacle):
             self.music.playSound()
-            self.printGameOver()
+            self.game_over.showGameOverScreen()
 
     def playBackgroundMusic(self):
         '''Toca a música de fundo do jogo.'''
