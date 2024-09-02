@@ -28,9 +28,9 @@ class Game:
         self.game_map = Map(screen, screen_width, screen_height)
         self.player = Player(screen)
         self.obstacle = Obstacle(screen_width, screen_height)
-        self.menu = Menu(screen_width, screen_height)
+        self.menu = Menu()
         self.music = Sound(musica_fundo, musica_colisao)
-        self.game_over = GameOver(screen_width, screen_height)
+        self.game_over = GameOver()
         self.running = True
         self.state = "Menu"
         self.timer = Timer(screen)
