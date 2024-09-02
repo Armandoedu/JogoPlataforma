@@ -18,7 +18,7 @@ musica_colisao = os.path.join(abs_path, 'Music', 'smw_1-up.wav')
 #pygame.display.set_caption("Rua Do Dispensário") // Roda sem
 
 # Tamanho da tela
-screen_width = 900 
+screen_width = 900
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 
