@@ -1,7 +1,6 @@
 import pygame
 import os
 
-# Pegar o caminho da imagem de fundo
 sprites_path = os.path.dirname(__file__)
 sprites = os.path.join(sprites_path, 'Sprites')
 image_path = sprites + '/map/'
@@ -14,5 +13,4 @@ class Map:
         self.rect = self.image.get_rect()
 
     def draw(self):
-        '''Desenha o mapa do jogo na tela.'''
         self.screen.blit(self.image, self.rect)

@@ -1,5 +1,4 @@
 import pygame
-# import os  // Roda sem
 
 class Sound:
     def __init__(self, background_music, collision_music):

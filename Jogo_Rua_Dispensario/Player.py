@@ -1,28 +1,23 @@
 import pygame
 import os
 
-# Pegar o caminho das sprites
 sprites_path = os.path.dirname(__file__)
 sprites = os.path.join(sprites_path, 'Sprites')
 player_sprites_run = sprites + '/spritesBoy/' + 'Boyrun.png'
 player_sprites_idle = sprites + '/spritesBoy/' + 'BoyIdle.png'
 player_sprites_jump = sprites + '/spritesBoy/' + 'Boyjump.png'
 
-# Carregar sprites
 sprite_sheet_run = pygame.image.load(player_sprites_run)
 sprite_sheet_idle = pygame.image.load(player_sprites_idle)
 sprite_sheet_jump = pygame.image.load(player_sprites_jump)
 
-# Vetores das sprites
 PLAYER_RUN = []
 PLAYER_IDLE = []
 PLAYER_JUMP = []
 
-# Dimensões das sprites
 PLAYER_DIMENSION = (32*3, 32*3)
 sprite_width, sprite_heigth = 32, 32
 
-# Cortando as sprites
 for i in range(4):
     x = i * sprite_width
     y = 0
@@ -33,7 +28,6 @@ for i in range(4):
     PLAYER_IDLE.append(IMG_IDLE)
     PLAYER_JUMP.append(IMG_JUMP)
 
-# Tamanho da tela
 width = 800
 height = 600
 
@@ -47,7 +41,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprites[self.current_sprite]
         self.image = pygame.transform.scale(self.image, (PLAYER_DIMENSION))
         self.rect = self.image.get_rect() 
-        self.rect.topleft = 0, 500 # Canto superior esquerdo
+        self.rect.topleft = 0, 500
         self.animate = False
         self.screen = screen
         self.speed = 6

@@ -12,8 +12,6 @@ class GameOver (Screen):
     def __init__(self):
         pygame.init()
         super().__init__()
-        # self.screen = pygame.display.set_mode((screen_width, screen_height))
-        # pygame.display.set_caption("Rua do Dispensário")
         self.image_background = pygame.image.load(f'{image_path}GameOver(2).jpg')
         self.running = True
 

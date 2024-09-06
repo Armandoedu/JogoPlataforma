@@ -10,14 +10,14 @@ class Obstacle:
         self.rect = self.image.get_rect()
         self.screen_width = screen_width
         self.rect.topleft = (screen_width - obstacle_size[0], screen_height - obstacle_size[1] - 45)
-        self.obstacle_speed = 5
+        self.obstacle_speed: int = 5
         self.rect.inflate_ip((- 45, - 45))
         
     def update(self):
-        self.obstacle_speed = random.randint(10,25)
+        self.obstacle_speed = random.randint(10,40)
         self.rect.x -= self.obstacle_speed 
         if self.rect.x < 0:
             self.rect.x = self.screen_width
-
+    
     def draw(self, screen):
         screen.blit(self.image, self.rect)
