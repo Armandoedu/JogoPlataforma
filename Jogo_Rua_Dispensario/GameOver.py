@@ -28,9 +28,6 @@ class GameOver (Screen):
                     self.running = False
                     pygame.quit()
                     exit()
-            
+
             self.screen.blit(self.image_background, (0,0))
             pygame.display.flip()
-
-
-

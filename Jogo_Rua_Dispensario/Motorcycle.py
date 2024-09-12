@@ -1,5 +1,5 @@
-import pygame 
-import os 
+import pygame
+import os
 from Obstacle import Obstacle
 
 sprites_path = os.path.dirname(__file__)

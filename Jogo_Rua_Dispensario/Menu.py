@@ -7,13 +7,12 @@ sprites_path = os.path.dirname(__file__)
 sprites = os.path.join(sprites_path, 'Sprites')
 image_path = sprites + '/menu/'
 
-class Menu (Screen):
+class Menu(Screen):
     def __init__(self):
         pygame.init()
         super().__init__()
         self.image_background = pygame.image.load(f'{image_path}dispeImagem.png')
         self.running = True
-
 
     def showMenuScreen(self):
         self.Tela()

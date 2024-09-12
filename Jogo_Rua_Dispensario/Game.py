@@ -26,23 +26,16 @@ class Game:
         self.music = Sound(musica_fundo, musica_colisao)
         self.game_over = GameOver()
         self.obstacle = ObstacleFactory.makeObstacle(screen_width, screen_height)
-
         self.running = True
         self.state = "Menu"
         self.timer = Timer(screen)
-
-    # def makeObstacle(self,screen):
-    #     obstacles = [self.car, self.motorcycle]
-    #     choose = random.choice(obstacles)
-    #     return choose.draw(screen)
 
     def draw(self, screen):
         self.game_map.draw()
         self.player.draw()
         self.obstacle.draw(screen)
-        if self.obstacle.rect.x >= screen_width: #verificando se o obstaculo passou da tela 
+        if self.obstacle.rect.x >= screen_width or self.obstacle.rect.y >= screen_height:
             self.obstacle = ObstacleFactory.makeObstacle(screen_width, screen_height)
-            #se passou, cria-se outro obstaculo aleatorio
         self.timer.printTimeOnScreen()
         pygame.display.flip()
 
@@ -56,12 +49,10 @@ class Game:
             self.game_over.showGameOverScreen()
 
     def playBackgroundMusic(self):
-        '''Toca a música de fundo do jogo.'''
         self.music.playMusic()
         self.music.setVolume(3)
 
     def run(self):
-        '''Roda o jogo.'''
         if self.state == "Menu":
             self.menu.showMenuScreen()
             self.state = "Playing"

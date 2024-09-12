@@ -1,10 +1,7 @@
 import pygame
 import time
 
-# Inicializa o Pygame
 pygame.init()
-
-# Define a fonte
 font = pygame.font.SysFont("Arial", 40)
 
 class Timer:
@@ -16,7 +13,7 @@ class Timer:
 
     def updateTime(self):
         right_now = time.time()
-        if right_now - self.last_time >= 1:  # Atualiza a cada 1 segundo
+        if right_now - self.last_time >= 1: # Atualiza a cada 1 segundo
             self.x -= 1
             self.last_time = right_now
         if self.x == -1:

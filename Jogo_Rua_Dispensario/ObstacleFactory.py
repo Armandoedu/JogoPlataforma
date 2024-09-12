@@ -1,13 +1,14 @@
 import pygame
 import random
-from Car import Car
 from Motorcycle import Motorcycle
+from Spikes import Spikes
+from Piano import Piano
+from Car import Car
 
-# fabrica de obstaculos para gerar obstaculos aleatorios 
+# fabrica de obstaculos para gerar obstaculos aleatorios
 class ObstacleFactory:
     @staticmethod
     def makeObstacle(screen_width, screen_height):
-        obstacles = [Car, Motorcycle]
+        obstacles = [Motorcycle, Car, Piano, Spikes]
         choose = random.choice(obstacles)
         return choose(screen_width, screen_height)
-    
