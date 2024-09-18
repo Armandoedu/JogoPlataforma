@@ -13,3 +13,5 @@ class Screen:
     def Tela(self):
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption(self.nome)
+        
+        

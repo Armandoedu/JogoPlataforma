@@ -17,7 +17,7 @@ screen_width = 900
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-class Game:
+class Game():
     def __init__(self):
         self.clock = pygame.time.Clock()
         self.game_map = Map(screen, screen_width, screen_height)

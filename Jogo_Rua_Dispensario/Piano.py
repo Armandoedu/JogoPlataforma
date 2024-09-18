@@ -11,5 +11,7 @@ obstacle_size = (32 * 3, 32 * 3)
 
 class Piano(Obstacle):
     def __init__(self, screen_width, screen_height):
-        super().__init__(screen_width, screen_height, obstacle_size, image_hydrant_path, x=random.randint(0, screen_width), y=920)
+        super().__init__(screen_width, screen_height, obstacle_size, image_hydrant_path)
+        self.rect.y = 0
+        self.rect.x = random.randint(0, 900)
         self.fall = True
