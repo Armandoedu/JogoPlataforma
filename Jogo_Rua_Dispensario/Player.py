@@ -28,7 +28,7 @@ for i in range(4):
     PLAYER_IDLE.append(IMG_IDLE)
     PLAYER_JUMP.append(IMG_JUMP)
 
-width = 800
+width = 900
 height = 600
 
 class Player(pygame.sprite.Sprite):
@@ -70,12 +70,14 @@ class Player(pygame.sprite.Sprite):
         self.animate = True
 
     def draw(self):
+        if self.rect.x > width:
+            self.rect.x = 0
         self.screen.blit(self.image, self.rect)
 
     def handleKeys(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a] > 0:
-            self.rect.x -= self.speed 
+            self.rect.x -= self.speed
             self.move()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.rect.x += self.speed

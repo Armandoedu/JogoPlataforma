@@ -5,7 +5,6 @@ from Spikes import Spikes
 from Piano import Piano
 from Car import Car
 
-# fabrica de obstaculos para gerar obstaculos aleatorios
 class ObstacleFactory:
     @staticmethod
     def makeObstacle(screen_width, screen_height):
